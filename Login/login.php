@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 // Check if the password matches
                 if ($user_data['password'] === $password) {
-                    $_SESSION['user_id'] = $user_data['user_id'];
+                    $_SESSION['email'] = $user_data['email'];
                     header("Location: index.php");
                     die;
                 }
