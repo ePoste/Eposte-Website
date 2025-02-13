@@ -18,15 +18,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (mysqli_num_rows($result) > 0) {
         $errorMessage = "This email is already registered. Please use a different email.";
     } else {
-        // Generate a unique user ID
-        $user_id = random_num(20);
 
         // Save the new user data to the database
-        $query = "INSERT INTO users (user_id, email, password) VALUES ('$user_id', '$email', '$password')";
+        $query = "INSERT INTO users (email, password) VALUES ('$email', '$password')";
         mysqli_query($con, $query);
 
-        // Redirect to login page after successful registration
-        header("Location: login.php");
+
+
+        // Redirect to index page after successful registration
+        $user_data["email"] = $email;
+        $_SESSION["email"] = $email;
+        header("Location: index.php");
     }
 }
 ?>
