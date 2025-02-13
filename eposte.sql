@@ -1,70 +1,62 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Feb 12, 2025 at 10:46 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+CREATE TABLE `Users` (
+  `email` varchar(255) PRIMARY KEY,
+  `password` varchar(255),
+  `userName` varchar(255)
+);
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+CREATE TABLE `Posts` (
+  `postId` integer PRIMARY KEY,
+  `ownerEmail` varchar(255),
+  `folderId` integer,
+  `postName` varchar(255),
+  `postDescription` varchar(255),
+  `created` date
+);
 
+CREATE TABLE `Folders` (
+  `folderId` integer PRIMARY KEY,
+  `ownerEmail` varchar(255),
+  `folderName` varchar(255),
+  `created` date
+);
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+CREATE TABLE `Tags` (
+  `tagId` integer PRIMARY KEY,
+  `tagName` varchar(255)
+);
 
---
--- Database: `eposte`
---
+CREATE TABLE `PostTags` (
+  `postTagsId` integer PRIMARY KEY,
+  `postId` integer,
+  `tagId` integer
+);
 
--- --------------------------------------------------------
+CREATE TABLE `SharedPosts` (
+  `sharedPostsId` integer PRIMARY KEY,
+  `postId` integer,
+  `sharedTo` varchar(255)
+);
 
---
--- Table structure for table `users`
---
+CREATE TABLE `SharedFolders` (
+  `SharedFoldersId` integer PRIMARY KEY,
+  `folderId` integer,
+  `sharedTo` varchar(255)
+);
 
-CREATE TABLE `users` (
-  `id` bigint(20) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+ALTER TABLE `Posts` ADD FOREIGN KEY (`ownerEmail`) REFERENCES `Users` (`email`);
 
---
--- Dumping data for table `users`
---
+ALTER TABLE `Posts` ADD FOREIGN KEY (`folderId`) REFERENCES `Folders` (`folderId`);
 
-INSERT INTO `users` (`id`, `user_id`, `email`, `password`) VALUES
-(1, 477812880574, 'anhkhoi2901@gmail.com', '1123');
+ALTER TABLE `Folders` ADD FOREIGN KEY (`ownerEmail`) REFERENCES `Users` (`email`);
 
---
--- Indexes for dumped tables
---
+ALTER TABLE `PostTags` ADD FOREIGN KEY (`postId`) REFERENCES `Posts` (`postId`);
 
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `user_id_2` (`user_id`),
-  ADD KEY `email` (`email`);
+ALTER TABLE `PostTags` ADD FOREIGN KEY (`tagId`) REFERENCES `Tags` (`tagId`);
 
---
--- AUTO_INCREMENT for dumped tables
---
+ALTER TABLE `SharedPosts` ADD FOREIGN KEY (`postId`) REFERENCES `Posts` (`postId`);
 
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-COMMIT;
+ALTER TABLE `SharedPosts` ADD FOREIGN KEY (`sharedTo`) REFERENCES `Users` (`email`);
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+ALTER TABLE `SharedFolders` ADD FOREIGN KEY (`folderId`) REFERENCES `Folders` (`folderId`);
+
+ALTER TABLE `SharedFolders` ADD FOREIGN KEY (`sharedTo`) REFERENCES `Users` (`email`);
