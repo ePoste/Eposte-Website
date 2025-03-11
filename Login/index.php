@@ -19,51 +19,101 @@ session_start();
 	<link rel="stylesheet" href="../CSS/index.css">
 </head>
 <body>
-<a href="account.php">
-  <img class="logo" src="../Logo/landing.png" alt="Logo">
-</a>
-    <div class="container">
-        <h2>Welcome Back!</h2>
-		<div class="search-container">
-			<i class="fa-solid fa-magnifying-glass"></i>
-			<input type="text" class="search-bar" placeholder="Search here....">
-		</div>
-        
+
+<div>
+    <div class="welcome-container">
+
+        <div class="welcome-content">
+            <h2 class="greetings">Welcome Back!</h2>
+            <div class="logo-container">
+                <a href="account.php">
+                    <img class="logo" src="../Logo/setting.png" alt="Logo">
+                </a>
+            </div>
+        </div>
+
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" class="search-bar" placeholder="Search here....">
+        </div>
+
         <div class="buttons">
-            <button class="btn btn-primary">+ New Folder</button>
-            <button class="btn btn-secondary">&#x1F4C4; Create Post</button>
+            <button class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i> New Folder</button>
+            <button class="btn btn-secondary"><i class="fa-solid fa-download"></i> Create Post</button>
         </div>
-		
+            
         
-		<div class="nice-container">
-		<div class="header">
-			<div class="column" class="name-text">Name</div>
-			<div class="column">Date Created</div>
-			<div class="column">Action</div>
-		</div>
-		<div class="row">
-			<div class="column">&#128193; Memes All Day</div>
-			<div class="column">dd/mm/yy</div>
-			<div class="column">...</div>
-		</div>
-		<div class="row">
-			<div class="column">&#128451; Memes All Day</div>
-			<div class="column">dd/mm/yy</div>
-			<div class="column">...</div>
-		</div>
-		</div>
-        
-        <button class="btn btn-primary">show all</button>
-        
-        <h3>File Selection</h3>
-        <div class="grid">
-            <div class="file-card">📄 Cat Videos <br> dd/mm/yy</div>
-            <div class="file-card">📄 Cat Videos <br> dd/mm/yy</div>
-            <div class="file-card">📄 Cat Videos <br> dd/mm/yy</div>
-			<div class="file-card">📄 Cat Videos <br> dd/mm/yy</div>
-            <div class="file-card">📄 Cat Videos <br> dd/mm/yy</div>
-            <div class="file-card">📄 Cat Videos <br> dd/mm/yy</div>
-        </div>
     </div>
+</div>
+
+    <div class="list-container">
+        <div class="header">
+        <div class="column"></div>
+            <div class="column" class="name-text">Name</div>
+            <div class="column">Date Created</div>
+            <div class="column">Action</div>
+        </div>
+        <div class="row">
+            <div class="column"><i class="fa-solid fa-folder"></i></div>
+            <div class="column">Memes All Day</div>
+            <div class="column">dd/mm/yy</div>
+            <div class="column"><i class="fa-solid fa-ellipsis"></i></div>
+        </div>
+        <div class="row">
+            <div class="column"><i class="fa-solid fa-folder"></i></div>
+            <div class="column">Memes All Day</div>
+            <div class="column">dd/mm/yy</div>
+            <div class="column"><i class="fa-solid fa-ellipsis"></i></div>
+        </div>
+            
+    </div>
+    <button class="show-all">show all</button>
+
+    <div class="file-container">
+      <p class="column">File selection</p>
+        <div class="file-selection-flex">
+            <div class="file-card">
+                <div>Cat Videos</div>
+                <div><i class="fa-regular fa-file"></i></div>
+                <div>dd/mm/yy</div>
+            </div>
+            <div class="file-card">
+                <div>Cat Videos</div>
+                <div><i class="fa-regular fa-file"></i></div>
+                <div>dd/mm/yy</div>
+            </div>
+            <div class="file-card">
+                <div>Cat Videos</div>
+                <div><i class="fa-regular fa-file"></i></div>
+                <div>dd/mm/yy</div>
+            </div>
+            <div class="file-card">
+                <div>Cat Videos</div>
+                <div><i class="fa-regular fa-file"></i></div>
+                <div>dd/mm/yy</div>
+            </div>
+            <div class="file-card">
+                <div>Cat Videos</div>
+                <div><i class="fa-regular fa-file"></i></div>
+                <div>dd/mm/yy</div>
+            </div>
+            <div class="file-card">
+                <div>Cat Videos</div>
+                <div><i class="fa-regular fa-file"></i></div>
+                <div>dd/mm/yy</div>
+            </div>
+            <div class="file-card">
+                <div>Cat Videos</div>
+                <div><i class="fa-regular fa-file"></i></div>
+                <div>dd/mm/yy</div>
+            </div>
+            
+
+        </div>
+        <button class="show-all show-all-last">show all</button>
+    </div>
+
+</div>
+
 </body>
 </html>

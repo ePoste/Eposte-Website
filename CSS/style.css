@@ -1,0 +1,65 @@
+/* Body and Page Styles */
+body {
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+/* The overlay div that blurs the background */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark semi-transparent background */
+    z-index: 999; /* Make sure it appears above the page content */
+    backdrop-filter: blur(5px); /* This blurs the content behind the modal */
+}
+
+/* Confirmation Box in the center */
+.confirmation-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    z-index: 1000; /* Make sure it appears above the overlay */
+}
+
+/* Buttons for confirming or canceling */
+.confirm-btn {
+    background-color: #e74c3c; /* Red color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.cancel-btn {
+    background-color: #3498db; /* Blue color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.cancel-btn:hover,
+.confirm-btn:hover {
+    opacity: 0.9;
+}
+
+/* Error message */
+.error-message {
+    margin-top: 20px;
+    color: red;
+    font-weight: bold;
+}

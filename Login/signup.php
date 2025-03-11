@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <link rel="stylesheet" href="../CSS/login.css">
-    <script src="scripts/validation.js" defer></script>
+    <script src="scripts/signup-validation.js" defer></script>
 </head>
 <body>
     <div id="login-container">
