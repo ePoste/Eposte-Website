@@ -5,7 +5,7 @@ CREATE TABLE `Users` (
 );
 
 CREATE TABLE `Posts` (
-  `postId` integer PRIMARY KEY,
+  `postId` integer AUTO_INCREMENT PRIMARY KEY,
   `ownerEmail` varchar(255),
   `folderId` integer,
   `postName` varchar(255),
@@ -14,31 +14,32 @@ CREATE TABLE `Posts` (
 );
 
 CREATE TABLE `Folders` (
-  `folderId` integer PRIMARY KEY,
+  `folderId` integer AUTO_INCREMENT PRIMARY KEY,
   `ownerEmail` varchar(255),
   `folderName` varchar(255),
+  'description' varchar(255),
   `created` date
 );
 
 CREATE TABLE `Tags` (
-  `tagId` integer PRIMARY KEY,
+  `tagId` integer AUTO_INCREMENT PRIMARY KEY,
   `tagName` varchar(255)
 );
 
 CREATE TABLE `PostTags` (
-  `postTagsId` integer PRIMARY KEY,
+  `postTagsId` integer AUTO_INCREMENT PRIMARY KEY,
   `postId` integer,
   `tagId` integer
 );
 
 CREATE TABLE `SharedPosts` (
-  `sharedPostsId` integer PRIMARY KEY,
+  `sharedPostsId` integer AUTO_INCREMENT PRIMARY KEY,
   `postId` integer,
   `sharedTo` varchar(255)
 );
 
 CREATE TABLE `SharedFolders` (
-  `SharedFoldersId` integer PRIMARY KEY,
+  `SharedFoldersId` integer AUTO_INCREMENT PRIMARY KEY,
   `folderId` integer,
   `sharedTo` varchar(255)
 );
