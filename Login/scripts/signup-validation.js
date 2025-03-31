@@ -1,199 +1,165 @@
-
 let emailInput = document.querySelector("#email");
 let passwordInput = document.querySelector('#pass');
 let retypePasswordInput = document.querySelector('#pass2');
 
-
-//email error paraghaph
+// Error messages
 let emailError = document.createElement('p');
 emailError.style.color = "red";
 document.querySelectorAll(".input-group")[0].append(emailError);
 emailError.style.marginTop = "8px";
-//password error paraghaph
+
 let passwordError = document.createElement('p');
 passwordError.style.color = "red";
 document.querySelectorAll(".input-group")[1].append(passwordError);
 passwordError.style.marginTop = "8px";
-//retype-password error paraghaph
+
 let retypePasswordError = document.createElement('p');
 retypePasswordError.style.color = "red";
 document.querySelectorAll(".input-group")[2].append(retypePasswordError);
 retypePasswordError.style.marginTop = "8px";
 
-
-
-//define a global variables
 let defaultMSg = "";
 
-//method to validate email
+// Email validation
 let emailErrorMsg = "X Email format should be xyz@xyz.xyz.";
-let emailEmpty = 
-    "X Email address should be non-empty";
-function vaildateEmail(){
-    let email = emailInput.value; 
-    let regexp = /^\S+@\S+\.\S+$/; 
-    if(regexp.test(email)) { 
+let emailEmpty = "X Email address should be non-empty";
+
+function vaildateEmail() {
+    let email = emailInput.value;
+    let regexp = /^\S+@\S+\.\S+$/;
+    if (regexp.test(email)) {
         emailInput.style.border = "1px solid gainsboro";
         emailInput.style.borderRadius = "4px";
         error = defaultMSg;
-    }
-    else if (email == "") {
+    } else if (email === "") {
         emailInput.style.border = "2px solid red";
         error = emailEmpty;
-    }
-    else {
+    } else {
         emailInput.style.border = "2px solid red";
         error = emailErrorMsg;
     }
-        return error;
+    return error;
 }
 
+// Password validation
+let passwordEmpty = "X Password should not be empty.";
+let passwordErrorMsg = "X Password should be at least 8 characters.";
 
-//method to validate password
-let passwordEmpty = "X Password should not be empty."
-let passwordErrorMsg = 
-    "X Password should be at least 8 characters."
 function validatePassword() {
     let password = passwordInput.value;
     let regexp = /^.{8,}$/;
     if (regexp.test(password)) {
-        passwordInput.style.border = "2px solid gainsboro";
+        passwordInput.style.border = "1px solid gainsboro";
         passwordInput.style.borderRadius = "4px";
         error = defaultMSg;
-    }
-    else if(password == "") {
+    } else if (password === "") {
         passwordInput.style.border = "2px solid red";
         error = passwordEmpty;
-    }
-    else {
+    } else {
         passwordInput.style.border = "2px solid red";
         error = passwordErrorMsg;
     }
     return error;
 }
 
-//method to validate retype-password
-let retypePasswordEmpty = "X Please retype password."
-let retypePasswordErrorMsg = "X Password does not match."
+// Retype password validation
+let retypePasswordEmpty = "X Please retype password.";
+let retypePasswordErrorMsg = "X Password does not match.";
+
 function validateRetypePassword() {
     let passwordRetype = retypePasswordInput.value;
     let password = passwordInput.value;
 
     if (password === "" && passwordRetype === "") {
         retypePasswordInput.style.border = "2px solid red";
-        error = retypePasswordEmpty; 
-    } 
-    else if (passwordRetype === "") {
+        error = retypePasswordEmpty;
+    } else if (passwordRetype === "") {
         retypePasswordInput.style.border = "2px solid red";
-        error = retypePasswordEmpty; 
-    } 
-    else if (passwordRetype !== password) {
+        error = retypePasswordEmpty;
+    } else if (passwordRetype !== password) {
         retypePasswordInput.style.border = "2px solid red";
         error = retypePasswordErrorMsg;
-    } 
-    else {
-        retypePasswordInput.style.border = "2px solid gainsboro";
+    } else {
+        retypePasswordInput.style.border = "1px solid gainsboro";
         retypePasswordInput.style.borderRadius = "4px";
-        error = ""; // Passwords match
+        error = defaultMSg;
     }
     return error;
 }
 
+// Master validation function
+function validate() {
+    let valid = true;
 
-
-
-
-function validate(){
-    let valid = true;//global validation 
-
-    //email onsubmit
-    if(vaildateEmail() !== defaultMSg) {
+    if (vaildateEmail() !== defaultMSg) {
         emailError.textContent = vaildateEmail();
         valid = false;
-    } 
+    }
 
-    //password onsubmit
-    if(validatePassword() !== defaultMSg) {
+    if (validatePassword() !== defaultMSg) {
         passwordError.textContent = validatePassword();
         valid = false;
     }
 
-    //retype-password onsubmit
-    if(validateRetypePassword() !== defaultMSg) {
+    if (validateRetypePassword() !== defaultMSg) {
         retypePasswordError.textContent = validateRetypePassword();
         valid = false;
     }
 
     return valid;
-};
+}
 
-// event listner to empty the text input
-const inputs = document.querySelectorAll("input");
+// Reset form error on reset
 function reserFormError() {
     emailError.textContent = defaultMSg;
     passwordError.textContent = defaultMSg;
     retypePasswordError.textContent = defaultMSg;
-    for (let i = 0; i < inputs.length; i++) {
-        inputs[i].style.border = "1px solid gainsboro";
-        inputs[i].style.borderRadius = "4px";
-    }
+
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach(input => {
+        input.style.border = "1px solid gainsboro";
+        input.style.borderRadius = "4px";
+    });
 }
-document.querySelector('form').addEventListener("reset",reserFormError);
+document.querySelector('form').addEventListener("reset", reserFormError);
 
-//add event listner to the email 
-emailInput.addEventListener("blur",()=>{ // arrow function
+// Blur/input listeners
+emailInput.addEventListener("blur", () => {
     let error = vaildateEmail();
-    if(error == defaultMSg) {
-        emailError.textContent = "";
-    }
-    else if(error == emailEmpty) {
-        emailError.textContent = emailEmpty;
-    }
-    else {
-        emailError.textContent = emailErrorMsg;
-    }
-    });
+    emailError.textContent = error !== defaultMSg ? error : "";
+});
+emailInput.addEventListener("input", () => emailError.textContent = defaultMSg);
 
-emailInput.addEventListener("input",()=>{ 
-        emailError.textContent = defaultMSg;
-    });
-
-//add event listner to the First Name 
-
-
-    //add event listner to the password
-passwordInput.addEventListener("blur",()=>{ // arrow function
+passwordInput.addEventListener("blur", () => {
     let error = validatePassword();
-    if(error == defaultMSg) {
-        passwordError.textContent = "";
-    }
-    else if(error == passwordEmpty ) {
-        passwordError.textContent = passwordEmpty;
-    }
-    else {
-        passwordError.textContent = passwordErrorMsg;
-    }
-    });
-passwordInput.addEventListener("input",()=>{ 
-        passwordError.textContent = defaultMSg;
-    });
+    passwordError.textContent = error !== defaultMSg ? error : "";
+});
+passwordInput.addEventListener("input", () => passwordError.textContent = defaultMSg);
 
-//add event listner to the retype-password
-retypePasswordInput.addEventListener("blur",()=>{ // arrow function
+retypePasswordInput.addEventListener("blur", () => {
     let error = validateRetypePassword();
-    if (error === defaultMSg){
-        retypePasswordError.textContent = "";
-    }
-    else if(error === retypePasswordErrorMsg) {
-        retypePasswordError.textContent = retypePasswordErrorMsg;
-    }
-    else if(error === retypePasswordEmpty ) {
-        retypePasswordError.textContent = retypePasswordEmpty;
-    }
-    })
+    retypePasswordError.textContent = error !== defaultMSg ? error : "";
+});
+retypePasswordInput.addEventListener("input", () => retypePasswordError.textContent = defaultMSg);
 
-    retypePasswordInput.addEventListener("input",() => { 
-        retypePasswordError.textContent = defaultMSg;
-    })
+// 🔐 SHA-256 Hashing Before Form Submission
+async function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex;
+}
 
-    
+// On form submit
+document.querySelector('form').addEventListener('submit', async function (e) {
+    e.preventDefault(); // Prevent default form submission
+
+    if (validate()) {
+        const hashed = await hashPassword(passwordInput.value);
+        passwordInput.value = hashed;
+        retypePasswordInput.value = hashed;
+        this.submit(); // Submit the form after hashing
+    }
+});

@@ -3,35 +3,30 @@ session_start();
 include("connection.php");
 include("functions.php");
 
-$errorMessage = ""; // Variable to store the error message
+$errorMessage = "";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    // Retrieve posted data
     $email = $_POST['email'];
     $password = $_POST['pass2'];
 
-    // Check if email already exists in the database
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
     $query = "SELECT * FROM users WHERE email = '$email'";
     $result = mysqli_query($con, $query);
 
-    // If email already exists, show an error
     if (mysqli_num_rows($result) > 0) {
         $errorMessage = "This email is already registered. Please use a different email.";
     } else {
-
-        // Save the new user data to the database
-        $query = "INSERT INTO users (email, password) VALUES ('$email', '$password')";
+        $query = "INSERT INTO users (email, password) VALUES ('$email', '$hashedPassword')";
         mysqli_query($con, $query);
 
-
-
-        // Redirect to index page after successful registration
-        $user_data["email"] = $email;
         $_SESSION["email"] = $email;
         header("Location: index.php");
+        exit;
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
