@@ -149,10 +149,12 @@ button:hover {
 
     .column i, .fa-file {
         font-size: 3.5em; /* This makes the icon 2 times larger */
+        cursor: pointer;
       }
 
 .fa-ellipsis:hover{
         color: rgb(63, 148, 167);
+        cursor: pointer;
       }
 
       .file-container {
@@ -180,4 +182,5 @@ button:hover {
 
 .file-card:hover {
     background-color: rgb(201, 201, 201);
+    cursor: pointer;
 }
