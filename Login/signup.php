@@ -7,16 +7,15 @@ $errorMessage = "";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $email = $_POST['email'];
-    $password = $_POST['pass2'];
-
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $hashedPassword = $_POST['pass2']; // SHA-256 hash from JavaScript
 
     $query = "SELECT * FROM users WHERE email = '$email'";
     $result = mysqli_query($con, $query);
 
     if (mysqli_num_rows($result) > 0) {
-        $errorMessage = "This email is already registered. Please use a different email.";
+        $errorMessage = "This email is already registered.";
     } else {
+        // Save hashed password directly (SHA-256 from JS)
         $query = "INSERT INTO users (email, password) VALUES ('$email', '$hashedPassword')";
         mysqli_query($con, $query);
 
@@ -26,8 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

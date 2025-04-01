@@ -1,41 +1,33 @@
 <?php 
 session_start();
-
 include("connection.php");
 include("functions.php");
 
-$errorMessage = ""; // Variable to store error message
+$errorMessage = "";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    // Retrieve posted data
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $hashedPassword = $_POST['password']; // SHA-256 hash from JavaScript
 
-    if (!empty($email) && !empty($password) && !is_numeric($email)) {
-        // Read from database
+    if (!empty($email) && !empty($hashedPassword)) {
         $query = "SELECT * FROM users WHERE email = '$email' LIMIT 1";
         $result = mysqli_query($con, $query);
 
-        if ($result) {
-            if (mysqli_num_rows($result) > 0) {
-                $user_data = mysqli_fetch_assoc($result);
+        if ($result && mysqli_num_rows($result) > 0) {
+            $user_data = mysqli_fetch_assoc($result);
 
-                // Check if the password matches
-                if ($user_data['password'] === $password) {
-                    $_SESSION['email'] = $user_data['email'];
-                    header("Location: index.php");
-                    die;
-                }
+            if ($user_data['password'] === $hashedPassword) {
+                $_SESSION['email'] = $user_data['email'];
+                header("Location: index.php");
+                exit;
             }
         }
-        
-        $errorMessage = "Wrong email or password!";
+        $errorMessage = "Invalid email or password!";
     } else {
-        $errorMessage = "Please fill in all fields correctly.";
+        $errorMessage = "Please fill in all fields.";
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
