@@ -55,6 +55,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <input id="delete" type="checkbox" name="delete">
             <input id="submit" type="submit">
         </form>
+        <form method="POST" action="deleteFolder.php"
+      onsubmit="return confirm('⚠️ Deleting this folder will also delete all posts inside it. This cannot be undone. Are you sure?');">
+  <input type="hidden" name="folderId" value="<?php echo $folder['folderId']; ?>">
+  <button type="submit" class="delete-btn">Delete Folder</button>
+</form>
+
         <?php if (!empty($errorMessage)): ?>
                 <p class="error-message" style="color: red; font-weight: bold; margin-top: 10px; text-align: center;"><?php echo $errorMessage; ?></p>
             <?php endif; ?>

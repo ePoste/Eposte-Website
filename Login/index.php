@@ -59,7 +59,7 @@ if ($viewing_folder) {
     </div>
 
     <div class="buttons">
-      <button onclick="window.location.href='createFolder2.php';" class="btn btn-primary">
+      <button onclick="window.location.href='createFolder.php';" class="btn btn-primary">
         <i class="fa-solid fa-circle-plus"></i> New Folder
       </button>
       <button onclick="window.location.href='createPost.php';" class="btn btn-secondary">
@@ -93,7 +93,7 @@ if ($viewing_folder) {
       echo '<div class="action-menu">';
       echo '<i class="fa-solid fa-ellipsis-h action-icon"></i>';
       echo '<div class="dropdown hidden">';
-      echo '<button onclick="window.location.href=\'editFolder2.php?id=' . $folder['folderId'] . '\';">Edit Folder</button>';
+      echo '<button onclick="window.location.href=\'editFolder.php?id=' . $folder['folderId'] . '\';">Edit Folder</button>';
       echo '<button onclick="window.location.href=\'index.php?id=' . $folder['folderId'] . '\';">Open Folder</button>';
       echo '<form method="POST" action="deleteFolder.php" onsubmit="return confirm(\'Are you sure you want to delete this folder?\');">';
       echo '<input type="hidden" name="folderId" value="' . $folder['folderId'] . '">';

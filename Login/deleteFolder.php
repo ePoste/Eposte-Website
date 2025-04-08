@@ -1,25 +1,31 @@
 <?php
 session_start();
 include("connection.php");
+include("functions.php");
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["folderId"])) {
-    $folderId = intval($_POST["folderId"]); // basic sanitation
+$user_data = check_login($con);
+$email = $_SESSION["email"];
 
-    // Optional: check if folder belongs to the logged-in user
-    $email = $_SESSION["email"];
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST["folderId"])) {
+    $folderId = intval($_POST["folderId"]);
+
+    // Check that the folder belongs to the logged-in user
     $check = mysqli_query($con, "SELECT * FROM folders WHERE folderId = $folderId AND ownerEmail = '$email'");
-    if (mysqli_num_rows($check) > 0) {
-        // Delete posts first
+    if ($check && mysqli_num_rows($check) > 0) {
+
+        // Delete all posts in the folder (posttags will be auto-deleted due to ON DELETE CASCADE)
         mysqli_query($con, "DELETE FROM posts WHERE folderId = $folderId");
 
-        // Then delete the folder
+        // Delete the folder
         mysqli_query($con, "DELETE FROM folders WHERE folderId = $folderId");
-    }
 
-    header("Location: index.php");
-    exit();
+        // Redirect back to dashboard
+        header("Location: index.php");
+        exit();
+    } else {
+        echo "You do not have permission to delete this folder.";
+    }
 } else {
-    header("Location: index.php"); // fallback
-    exit();
+    echo "Invalid request.";
 }
 ?>
