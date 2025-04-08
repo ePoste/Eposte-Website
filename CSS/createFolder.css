@@ -9,19 +9,281 @@ body {
   background: #f8f8f7;
 }
 
+.greetings {
+  margin-top: 3px;
+}
+
+.welcome-container {
+  width: 100%;
+  /* display: flex; */
+  /* justify-content: center;*/
+  align-items: center; 
+  background: #ffffff;
+  padding: 10px 40px; 
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-content{
+  display: flex;
+  justify-content:  space-between;
+  padding: 10px;
+}
+
 .logo {
   width: 65px;
   height: 70px;
 }
 
-#folder-form {
+.setting-container {
   max-width: 60%;
   margin: 0 auto;
   margin-top: 50px;
   background-color: white;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.setting-label{
+  text-align: center;
+  padding: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the input field horizontally */
+}
+
+#email {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #ebebe7;
+  border: none;
+  border-radius: 15px;
+  width: 80%; /* Adjust width to prevent it from being too wide */
+  margin-bottom: 10px;
+}
+
+.email-setting {
+  border-bottom: 1px solid #b4b4b4;
+}
+
+.change-group {
+  display: flex;
+  flex-direction: column; /* Stacks label above input */
+  align-items: flex-start; /* Aligns label to the left */
+  width: 100%; /* Ensures full width */
+  max-width: 80%; /* Prevents it from being too wide */
+  margin: 0 auto; /* Centers the whole group */
+  padding: 10px 0px;
+  
+}
+
+.change-label {
+  text-align: left; /* Ensures label text is left-aligned */
+  font-size: 18px; /* Adjust size if needed */
+  margin-bottom: 5px; /* Adds spacing between label and input */
+}
+
+#current-password, #new-password, #confirm-password {           
+  width: 100%; /* Makes input take full width */
+  padding: 10px;
+  background-color: #ebebe7;
+  border: none;
+  border-radius: 15px;
+}
+
+.button-container {
+  width: 90%;
+  display: flex;
+  justify-content: flex-end; /* Align button to the right */
+  margin-top: 10px; /* Add some spacing */
+}
+
+.change-form{
+  padding-bottom: 10px ;
+}
+
+.form-group input:focus {
+  outline: none;  /* Removes the default focus outline */
+  border: none; 
+} 
+
+
+.change-group input:focus {
+  outline: none;  /* Removes the default focus outline */
+  border: none; 
+} 
+
+.change-group input:focus::placeholder {
+  color: transparent;
+}
+
+input[type="email"] {
+  cursor: auto;
+}
+
+/* Buttons */
+.buttons {
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button {
+  background-color:rgb(117, 208, 229);
+  color: black;
+}
+
+button:hover {
+  background-color: rgb(78, 173, 194);
+}
+
+
+.button-save {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+
+.button-change {
+  text-align: left;
+  border: none;
+  background-color: white;
+  padding: 10px;
+  padding-left: 10%;
+  cursor: pointer;
+}
+
+.button-change:hover {
+  background-color: #ebebe7;
+}
+
+.logout-div{
+  border-bottom: 1px solid #b4b4b4;
+}
+.logout-button {
+  color: black;
+  text-decoration: none;
+  padding-right: 80%;
+}
+
+.delete-button {
+  color: red;
+}
+
+/* Full-page overlay with blur effect */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay */
+  backdrop-filter: blur(5px); /* Blurs the background */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  z-index: 999;
+}
+
+/* Success message box */
+.success-box {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  width: 80%;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Success message text */
+.message {
+  font-size: 20px;
+  font-weight: bold;
+  color: black; /* Green color */
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+#delete-detail-message{
+  font-size: 15px;
+  font-weight: 400;
+  color: black; /* Green color */
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.button-delete {
+  background-color: #ff0000;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+  border-radius: 15px;
+}
+
+.button-delete:hover {
+  background-color: #cc0000;
+}
+
+.button-cancel {
+  color: black;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+  border-radius: 15px;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: scale(0.9);
+  }
+  to {
+      opacity: 1;
+      transform: scale(1);
+  }
+}
+
+
+/* Style for the Font Awesome icon */
+.fa-circle-check {
+  font-size: 40px;  /* Bigger icon */
+  color: rgb(117, 208, 229);  /* Green color */
+  margin-top: 15px; /* Space from text */
+}
+
+#go-back-button{
+  font-size: large;
+  background-color: #ffffff;
+  color: #808080;
+  padding: 5px 70px 5px 2px;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+}
+
+
+
+/**********************/
+
+#name, #description{width: 100%; /* Makes input take full width */
+padding: 10px;
+background-color: #ebebe7;
+border: none;
+border-radius: 15px;
 }
