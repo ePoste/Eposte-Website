@@ -1,0 +1,176 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+h2 {
+  margin: 0;
+  color: #444;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-size: 16px;
+}
+
+input {
+  font-size: 16px;
+}
+
+/* Welcome Section */
+.welcome-container {
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.welcome-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.greetings {
+  font-size: 24px;
+}
+
+.logo-container {
+  width: 40px;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.btn-primary {
+  background-color: #4caf50;
+}
+
+.btn-secondary {
+  background-color: #2196f3;
+}
+
+/* Search Bar */
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.search-bar {
+  padding: 10px;
+  margin-left: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Folder List */
+.list-container {
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.folder-footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.show-all {
+  padding: 10px 20px;
+  background-color: #555;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}
+
+/* Shared Folders Section */
+.shared-folder-container {
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.shared-folder-container h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+/* File Section */
+.file-container {
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.file-selection-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.file-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.file-card i {
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+.file-card:hover {
+  background-color: #f0f0f0;
+}
