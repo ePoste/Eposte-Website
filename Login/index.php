@@ -16,6 +16,7 @@ if ($viewing_folder) {
     if ($row = $result->fetch_assoc()) {
         $welcome = $row['folderName'];
     }
+
 }
 ?>
 
@@ -95,6 +96,7 @@ if ($viewing_folder) {
       echo '<div class="dropdown hidden">';
       echo '<button onclick="window.location.href=\'editFolder.php?id=' . $folder['folderId'] . '\';">Edit Folder</button>';
       echo '<button onclick="window.location.href=\'index.php?id=' . $folder['folderId'] . '\';">Open Folder</button>';
+      echo '<button onclick="window.location.href=\'shareFolder.php?id=' . $folder['folderId'] . '\';">Share Folder</button>';
       echo '<form method="POST" action="deleteFolder.php" onsubmit="return confirm(\'Are you sure you want to delete this folder?\');">';
       echo '<input type="hidden" name="folderId" value="' . $folder['folderId'] . '">';
       echo '<button type="submit" class="delete-btn">Delete Folder</button>';
@@ -111,7 +113,52 @@ if ($viewing_folder) {
   }
   ?>
 </div>
+
+<div class="shared-folder-container">
+  <h2>Shared Folders</h2>
+  <?php
+  $email = $_SESSION['email'];
+  
+  $query = "SELECT * FROM sharedfolders WHERE sharedTo = '$email'";
+  $result = mysqli_query($con, $query);
+  
+  if (mysqli_num_rows($result) > 0) {
+    echo '<div class="header">';
+    echo '<div class="column"></div>';
+    echo '<div class="column name-text">Name</div>';
+    echo '<div class="column">Date Created</div>';
+    echo '<div class="column">Action</div>';
+    echo '</div>';
+    while($share = $result->fetch_assoc()) {
+      $id = $share['folderId'];
+      $query = "SELECT * FROM folders WHERE folderId = $id";
+      $folder = mysqli_query($con, $query)->fetch_assoc();
+      echo '<div class="column">' . 'owner: ' . $folder['ownerEmail'] . '</div>';
+      echo '<div class="row">';
+      echo '<div class="column"><a href="index.php?id=' . $folder['folderId'] . '"><i class="fa-solid fa-folder folder-icon"></i></a></div>';
+      echo '<div class="column">' . $folder['folderName'] . '</div>';
+      echo '<div class="column">' . $folder['created'] . '</div>';
+      echo '<div class="column action-column">';
+      echo '<div class="action-menu">';
+      echo '<i class="fa-solid fa-ellipsis-h action-icon"></i>';
+      echo '<div class="dropdown hidden">';
+      echo '<button onclick="window.location.href=\'index.php?id=' . $folder['folderId'] . '\';">Open Folder</button>';
+      echo '</form>';
+      echo '</div>'; // dropdown
+      echo '</div>'; // action-menu
+      echo '</div>'; // action-column
+      echo '</div>'; // row
+    }
+
+    echo '<div class="folder-footer">';
+    echo '<button class="show-all" onclick="window.location.href=\'showAllFolder.php\';">show all</button>';
+    echo '</div>';
+  }
+  ?>
+</div>
+
 <?php endif; ?>
+
 
 <div class="file-container">
   <?php
