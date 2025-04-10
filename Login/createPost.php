@@ -88,8 +88,8 @@ $folders = mysqli_query($con, "SELECT * FROM folders WHERE ownerEmail = '$email'
     }
 
     .btn-save {
-      background-color: #1ea7fd;
-      color: white;
+      background-color:rgb(86, 191, 210);
+      color: black;
       border: none;
       padding: 10px 20px;
       border-radius: 20px;
@@ -123,8 +123,8 @@ $folders = mysqli_query($con, "SELECT * FROM folders WHERE ownerEmail = '$email'
     }
 
     .tag {
-      background-color: #6c5ce7;
-      color: white;
+      background-color:rgb(60, 207, 223);
+      color: black;
       padding: 6px 12px;
       border-radius: 20px;
       display: flex;

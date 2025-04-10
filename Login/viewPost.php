@@ -53,8 +53,8 @@ while ($row = mysqli_fetch_assoc($tagsResult)) {
     }
 
     .tag {
-      background-color: #6c5ce7;
-      color: white;
+      background-color:rgb(106, 211, 243);
+      color: blacks;
       padding: 6px 12px;
       border-radius: 20px;
       display: inline-block;
@@ -83,7 +83,7 @@ while ($row = mysqli_fetch_assoc($tagsResult)) {
       margin-right: 10px;
       padding: 8px 14px;
       border-radius: 20px;
-      background: #1ea7fd;
+      background:rgb(66, 212, 223);
       color: white;
       font-weight: bold;
     }
