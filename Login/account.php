@@ -53,12 +53,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     } elseif (isset($_POST['delete_account'])) {
-        // Delete account logic
-        $query = "DELETE FROM users WHERE email = '$user_email'";
-        if (mysqli_query($con, $query)) {
-            session_destroy(); // Destroy the session
+        // Delete all related data in foreign-key safe order
+        $email = $user_email;
+    
+        // 1. Get all folderIds by user
+        $folderIds = [];
+        $res = mysqli_query($con, "SELECT folderId FROM folders WHERE ownerEmail = '$email'");
+        while ($row = mysqli_fetch_assoc($res)) {
+            $folderIds[] = $row['folderId'];
+        }
+    
+        if (!empty($folderIds)) {
+            $folderIdList = implode(",", array_map('intval', $folderIds));
+    
+            // 2. Get postIds in those folders
+            $postIds = [];
+            $res = mysqli_query($con, "SELECT postId FROM posts WHERE folderId IN ($folderIdList)");
+            while ($row = mysqli_fetch_assoc($res)) {
+                $postIds[] = $row['postId'];
+            }
+    
+            if (!empty($postIds)) {
+                $postIdList = implode(",", array_map('intval', $postIds));
+                mysqli_query($con, "DELETE FROM posttags WHERE postId IN ($postIdList)");
+                mysqli_query($con, "DELETE FROM sharedposts WHERE postId IN ($postIdList)");
+                mysqli_query($con, "DELETE FROM posts WHERE postId IN ($postIdList)");
+            }
+    
+            mysqli_query($con, "DELETE FROM sharedfolders WHERE folderId IN ($folderIdList)");
+            mysqli_query($con, "DELETE FROM folders WHERE folderId IN ($folderIdList)");
+        }
+    
+        // 3. Clean up shared folders/posts TO this user
+        mysqli_query($con, "DELETE FROM sharedfolders WHERE sharedTo = '$email'");
+        mysqli_query($con, "DELETE FROM sharedposts WHERE sharedTo = '$email'");
+    
+        // 4. Delete the user
+        if (mysqli_query($con, "DELETE FROM users WHERE email = '$email'")) {
+            session_destroy();
             $_SESSION['deleteMessage'] = "Account deleted successfully!";
-            header("Location: login.php"); // Redirect to login page
+            header("Location: login.php");
             exit;
         } else {
             $errorMessage = "Something went wrong. Try again!";
